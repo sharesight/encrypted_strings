@@ -15,5 +15,6 @@ Gem::Specification.new do |s|
   s.rdoc_options      = %w(--line-numbers --inline-source --title encrypted_strings --main README.rdoc)
   s.extra_rdoc_files  = %w(README.rdoc CHANGELOG.rdoc LICENSE)
   
+  s.add_development_dependency("minitest")
   s.add_development_dependency("rake")
 end

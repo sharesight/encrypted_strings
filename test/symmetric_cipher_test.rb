@@ -1,12 +1,12 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class NoPasswordErrorTest < Test::Unit::TestCase
+class NoPasswordErrorTest < Minitest::Test
   def test_should_exist
-    assert_not_nil EncryptedStrings::NoPasswordError
+    refute_nil EncryptedStrings::NoPasswordError
   end
 end
 
-class SymmetricCipherByDefaultTest < Test::Unit::TestCase
+class SymmetricCipherByDefaultTest < Minitest::Test
   def setup
     @symmetric_cipher = EncryptedStrings::SymmetricCipher.new(:password => 'secret')
   end
@@ -16,7 +16,7 @@ class SymmetricCipherByDefaultTest < Test::Unit::TestCase
   end
   
   def test_should_raise_exception
-    assert_raise(EncryptedStrings::NoPasswordError) {EncryptedStrings::SymmetricCipher.new}
+    assert_raises(EncryptedStrings::NoPasswordError) {EncryptedStrings::SymmetricCipher.new}
   end
   
   def test_should_encrypt_using_default_configuration
@@ -28,7 +28,7 @@ class SymmetricCipherByDefaultTest < Test::Unit::TestCase
   end
 end
 
-class SymmetricCipherWithCustomDefaultsTest < Test::Unit::TestCase
+class SymmetricCipherWithCustomDefaultsTest < Minitest::Test
   def setup
     @original_default_algorithm = EncryptedStrings::SymmetricCipher.default_algorithm
     @original_default_password = EncryptedStrings::SymmetricCipher.default_password
@@ -60,13 +60,13 @@ class SymmetricCipherWithCustomDefaultsTest < Test::Unit::TestCase
   end
 end
 
-class SymmetricCipherWithInvalidOptionsTest < Test::Unit::TestCase
+class SymmetricCipherWithInvalidOptionsTest < Minitest::Test
   def test_should_throw_an_exception
-    assert_raise(ArgumentError) {EncryptedStrings::SymmetricCipher.new(:invalid => true)}
+    assert_raises(ArgumentError) {EncryptedStrings::SymmetricCipher.new(:invalid => true)}
   end
 end
 
-class SymmetricCipherTest < Test::Unit::TestCase
+class SymmetricCipherTest < Minitest::Test
   def setup
     @symmetric_cipher = EncryptedStrings::SymmetricCipher.new(:password => 'secret')
   end
@@ -76,7 +76,7 @@ class SymmetricCipherTest < Test::Unit::TestCase
   end
 end
 
-class SymmetricCipherWithCustomOptionsTest < Test::Unit::TestCase
+class SymmetricCipherWithCustomOptionsTest < Minitest::Test
   def setup
     @symmetric_cipher = EncryptedStrings::SymmetricCipher.new(:algorithm => 'DES-EDE3-CFB', :password => 'secret')
   end

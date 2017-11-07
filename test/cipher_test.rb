@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class CipherByDefaultTest < Test::Unit::TestCase
+class CipherByDefaultTest < Minitest::Test
   def setup
     @cipher = EncryptedStrings::Cipher.new
   end

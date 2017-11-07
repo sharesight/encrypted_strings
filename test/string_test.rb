@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class StringByDefaultTest < Test::Unit::TestCase
+class StringByDefaultTest < Minitest::Test
   def setup
     @encrypted_string = 'test'.encrypt
   end
@@ -10,7 +10,7 @@ class StringByDefaultTest < Test::Unit::TestCase
   end
 end
 
-class StringWithCustomOptionsTest < Test::Unit::TestCase
+class StringWithCustomOptionsTest < Minitest::Test
   def setup
     @encrypted_string = 'test'.encrypt(:salt => 'different_salt')
   end
@@ -34,7 +34,7 @@ class StringWithCustomCipher
   end
 end
 
-class StringTest < Test::Unit::TestCase
+class StringTest < Minitest::Test
   def setup
     @string = 'test'
   end
@@ -52,7 +52,7 @@ class StringTest < Test::Unit::TestCase
   end
 end
 
-class StringAfterBeingEncryptedTest < Test::Unit::TestCase
+class StringAfterBeingEncryptedTest < Minitest::Test
   def setup
     @encrypted_string = 'test'.encrypt
   end
@@ -62,7 +62,7 @@ class StringAfterBeingEncryptedTest < Test::Unit::TestCase
   end
 end
 
-class StringAfterBeingEncryptedAndReplacedTest < Test::Unit::TestCase
+class StringAfterBeingEncryptedAndReplacedTest < Minitest::Test
   def setup
     @encrypted_string = 'string'
     @encrypted_string.encrypt!
@@ -81,7 +81,7 @@ class StringAfterBeingEncryptedAndReplacedTest < Test::Unit::TestCase
   end
 end
 
-class StringAfterBeingDecryptedTest < Test::Unit::TestCase
+class StringAfterBeingDecryptedTest < Minitest::Test
   def setup
     @encrypted_string = 'test'.encrypt(:symmetric, :password => 'secret')
     @decrypted_string = @encrypted_string.decrypt
@@ -96,7 +96,7 @@ class StringAfterBeingDecryptedTest < Test::Unit::TestCase
   end
 end
 
-class StringAfterBeingDecryptedAndReplacedTest < Test::Unit::TestCase
+class StringAfterBeingDecryptedAndReplacedTest < Minitest::Test
   def setup
     @encrypted_string = 'test'.encrypt(:symmetric, :password => 'secret')
     @encrypted_string.decrypt!
@@ -119,7 +119,7 @@ class StringAfterBeingDecryptedAndReplacedTest < Test::Unit::TestCase
   end
 end
 
-class StringWithUndecryptableCipherTest < Test::Unit::TestCase
+class StringWithUndecryptableCipherTest < Minitest::Test
   def setup
     @encrypted_string = 'test'.encrypt(:sha)
   end
@@ -129,7 +129,7 @@ class StringWithUndecryptableCipherTest < Test::Unit::TestCase
   end
   
   def test_should_raise_exception_if_decrypted
-    assert_raise(NotImplementedError) {@encrypted_string.decrypt}
+    assert_raises(NotImplementedError) {@encrypted_string.decrypt}
   end
   
   def test_should_be_able_to_check_equality_with_itself
@@ -156,12 +156,12 @@ class StringWithUndecryptableCipherTest < Test::Unit::TestCase
   def test_should_not_be_able_to_check_equality_more_than_one_encryption_away
     encrypted_encrypted_string = @encrypted_string.encrypt(:sha)
     
-    assert_not_equal 'test', encrypted_encrypted_string
-    assert_not_equal encrypted_encrypted_string, 'test'
+    refute_equal 'test', encrypted_encrypted_string
+    refute_equal encrypted_encrypted_string, 'test'
   end
 end
 
-class StringWithDecryptableCipherTest < Test::Unit::TestCase
+class StringWithDecryptableCipherTest < Minitest::Test
   def setup
     @encrypted_string = 'test'.encrypt(:symmetric, :password => 'secret')
   end
@@ -194,12 +194,12 @@ class StringWithDecryptableCipherTest < Test::Unit::TestCase
   def test_should_not_be_able_to_check_equality_more_than_one_encryption_away
     encrypted_encrypted_string = @encrypted_string.encrypt(:symmetric, :password => 'secret')
     
-    assert_not_equal 'test', encrypted_encrypted_string
-    assert_not_equal encrypted_encrypted_string, 'test'
+    refute_equal 'test', encrypted_encrypted_string
+    refute_equal encrypted_encrypted_string, 'test'
   end
 end
 
-class StringPreviouslyEncryptedTest < Test::Unit::TestCase
+class StringPreviouslyEncryptedTest < Minitest::Test
   def setup
     @encrypted_string = "oTxJd67ElLY=\n"
   end

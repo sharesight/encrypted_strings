@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 
-class ShaCipherByDefaulTest < Test::Unit::TestCase
+class ShaCipherByDefaulTest < Minitest::Test
   def setup
     @sha_cipher = EncryptedStrings::ShaCipher.new
   end
@@ -14,7 +14,7 @@ class ShaCipherByDefaulTest < Test::Unit::TestCase
   end
 end
 
-class ShaCipherWithCustomDefaultsTest < Test::Unit::TestCase
+class ShaCipherWithCustomDefaultsTest < Minitest::Test
   def setup
     @original_default_algorithm = EncryptedStrings::ShaCipher.default_algorithm
     @original_default_salt = EncryptedStrings::ShaCipher.default_salt
@@ -42,13 +42,13 @@ class ShaCipherWithCustomDefaultsTest < Test::Unit::TestCase
   end
 end
 
-class ShaCipherWithInvalidOptionsTest < Test::Unit::TestCase
+class ShaCipherWithInvalidOptionsTest < Minitest::Test
   def test_should_throw_an_exception
-    assert_raise(ArgumentError) {EncryptedStrings::ShaCipher.new(:invalid => true)}
+    assert_raises(ArgumentError) {EncryptedStrings::ShaCipher.new(:invalid => true)}
   end
 end
 
-class ShaCipherTest < Test::Unit::TestCase
+class ShaCipherTest < Minitest::Test
   def setup
     @sha_cipher = EncryptedStrings::ShaCipher.new
   end
@@ -62,7 +62,7 @@ class ShaCipherTest < Test::Unit::TestCase
   end
 end
 
-class ShaCipherWithCustomOptionsTest < Test::Unit::TestCase
+class ShaCipherWithCustomOptionsTest < Minitest::Test
   def setup
     @sha_cipher = EncryptedStrings::ShaCipher.new(:algorithm => 'sha512', :salt => 'different salt')
   end
@@ -80,7 +80,7 @@ class ShaCipherWithCustomOptionsTest < Test::Unit::TestCase
   end
 end
 
-class ShaCipherWithNonStringSaltTest < Test::Unit::TestCase
+class ShaCipherWithNonStringSaltTest < Minitest::Test
   require 'time'
   
   def setup
@@ -93,7 +93,7 @@ class ShaCipherWithNonStringSaltTest < Test::Unit::TestCase
   end
 end
 
-class ShaCipherWithProcSaltTest < Test::Unit::TestCase
+class ShaCipherWithProcSaltTest < Minitest::Test
   def setup
     @sha_cipher = EncryptedStrings::ShaCipher.new(:salt => lambda {|*args| @args = args; 'val'})
   end
@@ -107,7 +107,7 @@ class ShaCipherWithProcSaltTest < Test::Unit::TestCase
   end
 end
 
-class ShaCipherWithObjectSaltTest < Test::Unit::TestCase
+class ShaCipherWithObjectSaltTest < Minitest::Test
   def setup
     @object = Object.new
     class << @object
@@ -124,7 +124,7 @@ class ShaCipherWithObjectSaltTest < Test::Unit::TestCase
   end
 end
 
-class ShaCipherWithProcBuilderTest < Test::Unit::TestCase
+class ShaCipherWithProcBuilderTest < Minitest::Test
   def setup
     @sha_cipher = EncryptedStrings::ShaCipher.new(:builder => lambda {|data, salt| "#{data}|#{salt}"})
   end
@@ -134,7 +134,7 @@ class ShaCipherWithProcBuilderTest < Test::Unit::TestCase
   end
 end
 
-class ShaCipherWithObjectBuilderTest < Test::Unit::TestCase
+class ShaCipherWithObjectBuilderTest < Minitest::Test
   def setup
     @object = Object.new
     class << @object
