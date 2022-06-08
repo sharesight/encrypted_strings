@@ -62,7 +62,7 @@ module EncryptedStrings
     # Set defaults
     @default_algorithm = 'SHA1'
     @default_salt = 'salt'
-    @default_builder = lambda {|data, salt| "#{data}#{salt}"}
+    @default_builder = lambda { |data, salt| "#{data}#{salt}"}
     
     # The algorithm to use for encryption/decryption
     attr_accessor :algorithm

@@ -95,7 +95,7 @@ end
 
 class ShaCipherWithProcSaltTest < Minitest::Test
   def setup
-    @sha_cipher = EncryptedStrings::ShaCipher.new(:salt => lambda {|*args| @args = args; 'val'})
+    @sha_cipher = EncryptedStrings::ShaCipher.new(:salt => lambda { |*args| @args = args; 'val'})
   end
 
   def test_should_call_proc_without_arguments
@@ -126,7 +126,7 @@ end
 
 class ShaCipherWithProcBuilderTest < Minitest::Test
   def setup
-    @sha_cipher = EncryptedStrings::ShaCipher.new(:builder => lambda {|data, salt| "#{data}|#{salt}"})
+    @sha_cipher = EncryptedStrings::ShaCipher.new(:builder => lambda { |data, salt| "#{data}|#{salt}"})
   end
 
   def test_should_encrypt_based_on_custom_builder

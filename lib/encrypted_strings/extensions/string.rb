@@ -97,7 +97,7 @@ module EncryptedStrings
       def decrypt(*args)
         raise ArgumentError, 'Cipher cannot be inferred: must specify it as an argument' if args.empty? && !encrypted?
         
-        cipher = args.empty? && self.cipher || cipher_from_args(*args)
+        cipher = (args.empty? && self.cipher) || cipher_from_args(*args)
         encrypted_string = cipher.decrypt(self)
         encrypted_string.cipher = nil
         
@@ -157,7 +157,8 @@ module EncryptedStrings
               # (2) This string is the encrypted value of the other string
               # (3) The other string is the encrypted value of this string, decrypted
               # (4) This string is the encrypted value of the other string, decrypted
-              is_string_equal?(self, other) || is_string_equal?(other, self) || self.can_decrypt? && is_string_equal?(self.decrypt, other) || other.can_decrypt? && is_string_equal?(other.decrypt, self)
+              is_string_equal?(self, 
+                               other) || is_string_equal?(other, self) || (self.can_decrypt? && is_string_equal?(self.decrypt, other)) || (other.can_decrypt? && is_string_equal?(other.decrypt, self))
             else
               # Only we're encrypted
               is_string_equal?(other, self)
