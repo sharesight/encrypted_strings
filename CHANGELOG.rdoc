@@ -2,6 +2,7 @@
 
 == Unreleased
 
+* Add Slack notification to GA workflows {#15}[https://github.com/sharesight/encrypted_strings/pull/7]
 * Run tests and Rubocop with Github Actions {#6}[https://github.com/sharesight/encrypted_strings/pull/6]
 * Add Rubocop linting {#7}[https://github.com/sharesight/encrypted_strings/pull/7]
 * Address CircleCI Ruby image deprecation {#5}[https://github.com/sharesight/encrypted_strings/pull/5]
