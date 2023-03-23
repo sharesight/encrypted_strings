@@ -1,7 +1,8 @@
 == master
 
-== Unreleased
+== 0.4.0 / 2023-03-23
 
+* Support Ruby 3.0 {#11}[https://github.com/sharesight/encrypted_strings/pull/11]
 * Delete CircleCI config {#9}[https://github.com/sharesight/encrypted_strings/pull/9]
 * Add Slack notification to GA workflows {#8}[https://github.com/sharesight/encrypted_strings/pull/8]
 * Run tests and Rubocop with Github Actions {#6}[https://github.com/sharesight/encrypted_strings/pull/6]
