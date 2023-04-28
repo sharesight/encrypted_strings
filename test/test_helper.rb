@@ -1,4 +1,4 @@
-require "minitest/autorun"
+require 'maxitest/autorun'
 require "shoulda-matchers"
 $:.unshift(File.dirname(__FILE__) + '/../lib')
 require File.dirname(__FILE__) + '/../init'
