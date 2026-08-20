@@ -41,8 +41,8 @@ module EncryptedStrings
       # 
       #   password = 'shhhh'
       #   password.encrypt(:sha, :salt => 'secret') # => "3b22cbe4acde873c3efc82681096f3ae69aff828"
-      def encrypt(*args)
-        cipher = cipher_from_args(*args)
+      def encrypt(*)
+        cipher = cipher_from_args(*)
         encrypted_string = cipher.encrypt(self)
         encrypted_string.cipher = cipher
         
@@ -58,8 +58,8 @@ module EncryptedStrings
       #   password = 'shhhh'
       #   password.encrypt!(:symmetric, :password => 'secret')  # => "qSg8vOo6QfU=\n"
       #   password                                              # => "qSg8vOo6QfU=\n"
-      def encrypt!(*args)
-        encrypted_string = encrypt(*args)
+      def encrypt!(*)
+        encrypted_string = encrypt(*)
         self.cipher = encrypted_string.cipher
         
         replace(encrypted_string)
@@ -113,8 +113,8 @@ module EncryptedStrings
       #   password = "qSg8vOo6QfU=\n"
       #   password.decrypt!(:symmetric, :password => 'secret')  # => "shhhh"
       #   password                                              # => "shhhh"
-      def decrypt!(*args)
-        value = replace(decrypt(*args))
+      def decrypt!(*)
+        value = replace(decrypt(*))
         self.cipher = nil
         value
       end
@@ -201,6 +201,6 @@ module EncryptedStrings
   end
 end
 
-::String.class_eval do
+String.class_eval do
   include EncryptedStrings::Extensions::String
 end
